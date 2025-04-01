@@ -87,8 +87,8 @@ function GameController() {
             }
         } else {
             board.printBoard();
-            activePlayer = `${winner.name} Wins!`
-            console.log(`${winner.name} Wins!`);
+            activePlayer = `${winner} Wins!`
+            console.log(`${winner} Wins!`);
         }
     }
 
@@ -124,13 +124,20 @@ function GameController() {
 
         const winnerToken = checkResults.find((value) => value > 0);
         const winner = players.find((value) => value.token === winnerToken);
-
-        return(winner);
+        if (winner === undefined) {
+            console.log(`Winner: ${winner}`);
+            return(winner);
+        } else {
+            console.log(winner.name);
+            return(`${winner.name}`);
+        }
     }
+
+    const getTurnNumber = () => turn;
 
     printNewRound();
 
-    return {playRound, getActivePlayer, getBoard: board.getBoard};
+    return {playRound, getActivePlayer, getBoard: board.getBoard, getTurnNumber, checkWinner};
 }
 
 function DisplayController() {
@@ -144,8 +151,17 @@ function DisplayController() {
 
     const updateDisplay = () => {
         boardDisplay.replaceChildren();
-        const activePlayer = game.getActivePlayer();
-        playerTurn.textContent = `${activePlayer.name}'s turn`;
+        let activePlayer = game.getActivePlayer();
+        
+        if (game.checkWinner() === undefined && game.getTurnNumber() >= 9) {
+            activePlayer = "Tie!"
+            playerTurn.textContent = activePlayer;
+        } else if (game.checkWinner() != undefined) {
+            activePlayer = game.checkWinner();
+            playerTurn.textContent = `${activePlayer} Wins!`
+        } else {
+            playerTurn.textContent = `${activePlayer.name}'s turn`;
+        }
 
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 3; j++) {
