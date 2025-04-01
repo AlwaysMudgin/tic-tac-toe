@@ -1,0 +1,44 @@
+:root {
+    margin: 0;
+    padding: 0;
+    --gray-background: rgb(105, 105, 105);
+}
+
+body {
+    background-color: var(--gray-background);
+}
+
+.container {
+    display: grid;
+    justify-content: center;
+}
+
+.player {
+    font-size: 24px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.gameboard {
+    width: 320px;
+    background-color: rgb(39, 39, 39);
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 10px;
+}
+
+.cell {
+    background-color: var(--gray-background);
+    padding: 5px;
+}
+
+.cell:hover {
+    background-color: rgb(80, 80, 80);
+}
+
+img {
+    width: 90px;
+    height: 90px;
+}
