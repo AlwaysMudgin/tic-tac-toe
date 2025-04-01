@@ -137,7 +137,10 @@ function DisplayController() {
     const game = GameController();
     const playerTurn = document.querySelector(".player");
     const boardDisplay = document.querySelector(".gameboard");
-    const board = game.getBoard();
+    const newGameButton = document.querySelector(".reset");
+    newGameButton.addEventListener("click", () => {
+        DisplayController();
+    })
 
     const updateDisplay = () => {
         boardDisplay.replaceChildren();
@@ -170,6 +173,7 @@ function DisplayController() {
         }
         console.log(game.getBoard());
     }
+
     updateDisplay();
 }
 DisplayController();
